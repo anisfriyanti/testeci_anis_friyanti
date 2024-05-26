@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LevelController;
@@ -23,12 +24,14 @@ Route::get('/', function () {
 
 Route::get('currency',[CurrencyController::class, 'index']);
 
-Route::get('karyawan',[KaryawanController::class,'index']);
-Route::post('karyawan',[KaryawanController::class,'store']);
-Route::put('karyawan/{id}',[KaryawanController::class,'update']);
-Route::delete('karyawan/{id}',[KaryawanController::class,'destroy']);
 
-
+Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
+    Route::get('/',[KaryawanController::class,'index']);
+    Route::post('/',[KaryawanController::class,'store']);
+    Route::put('/{id}',[KaryawanController::class,'update']);
+    Route::delete('/{id}',[KaryawanController::class,'destroy']);
+   
+});
 Route::group(['prefix' => 'level', 'as' => 'level.'], function () {
     Route::get('/',[LevelController::class,'index']);
     Route::post('/',[LevelController::class,'store']);
@@ -41,6 +44,13 @@ Route::group(['prefix' => 'jabatan', 'as' => 'jabatan.'], function () {
     Route::post('/',[JabatanController::class,'store']);
     Route::put('/{id}',[JabatanController::class,'update']);
     Route::delete('/{id}',[JabatanController::class,'destroy']);
+   
+});
+Route::group(['prefix' => 'department', 'as' => 'department.'], function () {
+    Route::get('/',[DepartmentController::class,'index']);
+    Route::post('/',[DepartmentController::class,'store']);
+    Route::put('/{id}',[DepartmentController::class,'update']);
+    Route::delete('/{id}',[DepartmentController::class,'destroy']);
    
 });
 

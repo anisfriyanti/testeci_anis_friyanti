@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\KaryawanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('currency',[CurrencyController::class, 'index']);
+
+Route::get('karyawan',[KaryawanController::class,'index']);
+Route::post('karyawan',[KaryawanController::class,'store']);
+Route::put('karyawan/{id}',[KaryawanController::class,'update']);
+Route::delete('karyawan/{id}',[KaryawanController::class,'destroy']);
+

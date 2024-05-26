@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LevelController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,13 @@ Route::group(['prefix' => 'level', 'as' => 'level.'], function () {
     Route::post('/',[LevelController::class,'store']);
     Route::put('/{id}',[LevelController::class,'update']);
     Route::delete('/{id}',[LevelController::class,'destroy']);
+   
+});
+Route::group(['prefix' => 'jabatan', 'as' => 'jabatan.'], function () {
+    Route::get('/',[JabatanController::class,'index']);
+    Route::post('/',[JabatanController::class,'store']);
+    Route::put('/{id}',[JabatanController::class,'update']);
+    Route::delete('/{id}',[JabatanController::class,'destroy']);
    
 });
 

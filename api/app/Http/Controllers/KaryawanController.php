@@ -148,16 +148,10 @@ class KaryawanController extends Controller
      */
     public function destroy($id)
     {
-        $delete =Karyawan::where('id_karyawan', $id);
-       
+        $delete = Karyawan::where('id_karyawan', $id);
+        $delete->delete();
+        return Formatresponse::successResponse();
 
-    
 
-            $delete->delete();
-        
-
-            return Formatresponse::successResponse();
-        
-     
     }
 }

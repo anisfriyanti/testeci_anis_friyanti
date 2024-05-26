@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Formatresponse;
+use App\Models\Level;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class LevelController extends Controller
 {
     /**
@@ -11,9 +13,14 @@ class LevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $paginate = Formatresponse::requestpaginate($request);
+
+        $code = 200;
+        $push = Level::all();
+        $output = Formatresponse::paginate($push, $paginate['perPage'], $paginate['page'], $paginate['url'], $code, 'ok');
+        return $output;
     }
 
     /**
@@ -34,7 +41,31 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+           
+            'nama_level' => 'required',
+            
+
+        ]);
+        if ($validator->fails()) {
+            return Formatresponse::buildFailedValidationResponse($validator->messages());
+        } else {
+
+            // return Formatresponse::successfullResponse(null);
+            $insert = [
+               
+                'nama_level' => $request->post('nama_level'),
+               
+            ];
+
+            $post = Level::create($insert);
+            if (!$post) {
+                return Formatresponse::failedResponse();
+            } else {
+                return Formatresponse::createdResponse($post);
+            }
+
+        }
     }
 
     /**
@@ -68,7 +99,34 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+        
+            'nama_level' => 'required',
+         
+
+
+        ]);
+        if ($validator->fails()) {
+            return Formatresponse::buildFailedValidationResponse($validator->messages());
+        } else {
+
+
+
+            $post = Level::where('id_level', $id)
+                ->update([
+                    'nama_level'=> $request->nama_level,
+                    
+
+                ]);
+
+
+            if (!$post) {
+                return Formatresponse::failedResponse();
+            } else {
+                return Formatresponse::successResponse();
+            }
+
+        }
     }
 
     /**
@@ -79,6 +137,9 @@ class LevelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Level::where('id_level', $id);
+        $delete->delete();
+        return Formatresponse::successResponse();
+
     }
 }

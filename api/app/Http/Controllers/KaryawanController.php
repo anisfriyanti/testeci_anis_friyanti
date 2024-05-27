@@ -20,7 +20,7 @@ class KaryawanController extends Controller
         $paginate = Formatresponse::requestpaginate($request);
 
         $code = 200;
-        $push = Karyawan::all();
+        $push = Karyawan::list();
         $output = Formatresponse::paginate($push, $paginate['perPage'], $paginate['page'], $paginate['url'], $code, 'ok');
         return $output;
     }

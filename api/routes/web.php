@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\StarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('currency',[CurrencyController::class, 'index']);
-
+Route::get('star',[StarController::class, 'index']);
 
 Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
     Route::get('/',[KaryawanController::class,'index']);

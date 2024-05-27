@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Guzzlemenu;
 use App\Models\Menuformat;
 use Illuminate\Http\Request;
@@ -8,29 +9,30 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
 
-class LevelController extends Controller
+class JabatanController extends Controller
 {
     public function index(Request $request)
     {
         $page = $request->get('page');
         $limit = 5;
-        $url="level?limit=".$limit."&page=".$page;
+        $url="jabatan?limit=".$limit."&page=".$page;
         $data =  Guzzlemenu::guzzleGetstring($url);
         // echo json_encode($data);
      
          if (isset($data->code)) {
 
             if ($data->code === 200 || $data->code=== 404) {
-                   return view("level/index",compact('data'));
+                   return view("jabatan/index",compact('data'));
 
             }else{
-                return redirect('level')->with('message_error', $data->message);
+                return redirect('jabatan')->with('message_error', $data->message);
             }
         }
     }
     public function add(Request $request){
         $validator = Validator::make($request->all(), [
-            'nama_level' => 'required',
+            'nama_jabatan' => 'required',
+            'level_select'=>'required'
         ]);
     
         if ($validator->fails()) {
@@ -38,11 +40,12 @@ class LevelController extends Controller
         } else {
             $data = array(
 
-                'nama_level' => $request->input('nama_level'),
+                'nama_jabatan' => $request->input('nama_jabatan'),
+                'id_level'=>$request->input('level_select')
 
             );
-            $url = 'level';
-            $page = 'level';
+            $url = 'jabatan';
+            $page = 'jabatan';
             $result = Guzzlemenu::guzzlePostJsonPayload($url, json_encode($data));
             if (isset($result->code)) {
                 if ($result->code === 200) {
@@ -60,30 +63,22 @@ class LevelController extends Controller
         }
     }
     public function delete(Request $request){
-        $url = 'level/' . $request->route("id");
+        $url = 'jabatan/' . $request->route("id");
         $result = Guzzlemenu::guzzleDelete($url);
         return json_encode($result);
       
 
     }
-    public function show(Request $request){
-        $url ='level/'. $request->route("id");
-        $result = Guzzlemenu::guzzleGetstring($url);
-        return json_encode($result);
-    }
-    public function select(Request $request){
-
-        $url="level?limit=100";
-        $data =  Guzzlemenu::guzzleGetstring($url);
-       return  json_encode($data);
-
-
-
-    }
+    // public function show(Request $request){
+    //     $url ='jabatan/'. $request->route("id");
+    //     $result = Guzzlemenu::guzzleGetstring($url);
+    //     return json_encode($result);
+    // }
     public function edit(Request $request){
         $validator = Validator::make($request->all(), [
-            'nama_level_show' => 'required',
-            'id_level_show'=>'required'
+            'nama_jabatan_show' => 'required',
+            'id_jabatan_show'=>'required',
+            'level_select_edit'=>'required'
         ]);
     
         if ($validator->fails()) {
@@ -91,12 +86,12 @@ class LevelController extends Controller
         } else {
             $data = array(
 
-                'nama_level' => $request->input('nama_level_show'),
-                // 'id_level'=>$request->input('id_level_show')
+                'nama_jabatan' => $request->input('nama_jabatan_show'),
+                 'id_level'=>$request->input('level_select_edit')
 
             );
-            $url = 'level/'.$request->input('id_level_show');
-            $page = 'level';
+            $url = 'jabatan/'.$request->input('id_jabatan_show');
+            $page = 'jabatan';
             $result = Guzzlemenu::putWithRawBody($url, $data);
             if (isset($result->code)) {
                 if ($result->code === 200) {

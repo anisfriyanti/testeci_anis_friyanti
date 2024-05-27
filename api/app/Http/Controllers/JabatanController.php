@@ -18,7 +18,7 @@ class JabatanController extends Controller
         $paginate = Formatresponse::requestpaginate($request);
 
         $code = 200;
-        $push = Jabatan::all();
+        $push = Jabatan::list();
         $output = Formatresponse::paginate($push, $paginate['perPage'], $paginate['page'], $paginate['url'], $code, 'ok');
         return $output;
     }

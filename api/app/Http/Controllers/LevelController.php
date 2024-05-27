@@ -76,7 +76,7 @@ class LevelController extends Controller
      */
     public function show($id)
     {
-       $data=Level::where('id_level',$id)->get();
+       $data=Level::where('id_level',$id)->first();
        return Formatresponse::successfullResponse($data);
     }
 

@@ -34,6 +34,7 @@ Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
 });
 Route::group(['prefix' => 'level', 'as' => 'level.'], function () {
     Route::get('/',[LevelController::class,'index']);
+    Route::get('/{id}',[LevelController::class,'show']);
     Route::post('/',[LevelController::class,'store']);
     Route::put('/{id}',[LevelController::class,'update']);
     Route::delete('/{id}',[LevelController::class,'destroy']);

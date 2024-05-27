@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\StarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[CurrencyController::class, 'index']);
 
 
 Route::group(['prefix' => 'currency', 'as' => 'currency.'], function () {
     Route::get('/',[CurrencyController::class, 'index']);
     Route::post('/',[CurrencyController::class, 'result']);
+  
+   
+});
+Route::group(['prefix' => 'star', 'as' => 'star.'], function () {
+    Route::get('/',[StarController::class, 'index']);
+    Route::post('/',[StarController::class, 'result']);
   
    
 });

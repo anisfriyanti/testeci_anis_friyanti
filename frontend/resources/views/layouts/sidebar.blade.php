@@ -21,7 +21,7 @@
           
         </li>
         <li>
-            <a href="">
+            <a href="{{ URL::to('star') }}">
               <i class="fa fa-th"></i> <span>Test 1</span>
               <span class="pull-right-container">
                 <small class="label pull-right bg-green">new</small>
@@ -29,7 +29,7 @@
             </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{ URL::to('currency') }}">
             <i class="fa fa-th"></i> <span>Test 2</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -39,16 +39,16 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Data Karyawan</span>
+            <span>Data Perusahaan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Data Karyawan</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Data Jabatan</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Data level</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Data Department</a></li>
+            <li><a href="{{ URL::to('karyawan') }}"><i class="fa fa-circle-o"></i> Data Karyawan</a></li>
+            <li><a href="{{ URL::to('jabatan') }}"><i class="fa fa-circle-o"></i> Data Jabatan</a></li>
+            <li><a href="{{ URL::to('level') }}"><i class="fa fa-circle-o"></i> Data level</a></li>
+            <li><a href="{{ URL::to('department') }}"><i class="fa fa-circle-o"></i> Data Department</a></li>
           </ul>
         </li>
        

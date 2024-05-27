@@ -35,7 +35,7 @@ class Guzzlemenu extends Model
 
             $response = $client->post($url, [
                 "headers" => [
-                    'Authorization' => 'Bearer ' . Session::get('token'),
+                
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ],
@@ -94,8 +94,55 @@ class Guzzlemenu extends Model
         try {
 
             $response = $client->get($url, [
+               
+            ]);
+            return json_decode($response->getBody()->getContents());
+
+
+
+        } catch (RequestException $e) {
+
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+                $body = $response->getBody();
+                return json_decode($body);
+
+            } else {
+                $output['code'] = 400;
+                $output['message'] = 'Bad Request Server';
+                $data = response()->json($output, 400);
+                return json_decode($data->content());
+            }
+
+        } catch (ConnectException $e) {
+            Log::Warning('guzzle_connection_timeout', [
+                'url' => $baseurl,
+                'message' => 'cek hostname or path url'
+
+            ]);
+
+            $output['code'] = 502;
+            $output['message'] = 'bad gateway';
+
+
+            $data = response()->json($output, 502);
+            return json_decode($data->content());
+
+
+        }
+    }
+    public static function guzzleDelete($url)
+    {
+        //$baseurl ="facebook.com";
+        $baseurl = env('APP_URL_API');
+        $client = new Client(['base_uri' => $baseurl]);
+
+
+        try {
+
+            $response = $client->delete($url, [
                 "headers" => [
-                    'Authorization' => 'Bearer ' . Session::get('token')
+                  
                 ]
             ]);
             return json_decode($response->getBody()->getContents());
@@ -131,6 +178,49 @@ class Guzzlemenu extends Model
             return json_decode($data->content());
 
 
+        }
+    }
+    public static function putWithRawBody($url, $request)
+    {
+        $baseurl = env('APP_URL_API');
+        $client = new Client(['base_uri' => $baseurl]);
+
+        try {
+            $response = $client->put($url, [
+                "headers" => [
+                   
+                    'Content-Type' => 'application/json; charset=utf-8',
+                    'Accept' => 'application/json'
+                ],
+                "http_errors" => false,
+                "json" => $request
+            ]);
+            return json_decode($response->getBody()->getContents());
+
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+                $body = $response->getBody();
+                return json_decode($body);
+            } else {
+                $output['code'] = 400;
+                $output['message'] = 'Bad Request Server';
+                $data = response()->json($output, 400);
+                return json_decode($data->content());
+            }
+        } catch (ConnectException $e) {
+            Log::Warning('guzzle_connection_timeout', [
+                'url' => $baseurl,
+                'message' => 'cek hostname or path url'
+
+            ]);
+            $output['code'] = 502;
+            $output['message'] = 'bad gateway';
+            $data = response()->json($output, 502);
+            return json_decode($data->content());
+
+        } catch (ClientException $e) {
+            return json_decode($e->getResponse()->getBody()->getContents());
         }
     }
 }

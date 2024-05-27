@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Transaksi</h3>
+                    <h3 class="box-title">Test 2</h3>
                 </div>
 
                 <div class="box-body">
@@ -20,8 +20,7 @@
 
 
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Total</label>
-                                        {{-- <input type="hidden" class="form-control" name="total" id="total" placeholder="Enter Total" > --}}
+                                        <label for="exampleInputPassword1">Masukkan Nominal</label>
                                         <input type="number" class="form-control" name="money" id="money"
                                             placeholder="Masukkan Angka" required>
                                     </div>

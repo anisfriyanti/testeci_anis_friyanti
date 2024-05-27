@@ -44,39 +44,59 @@ class StarController extends Controller
       
     }
     public function type1($max){
-        echo "<html>";
+       
+        $a=array();
+        $str = "*";
+  
         for($i = 1; $i<=$max;$i++){
+     
             for($j=0; $j<$i; $j++){
-                echo "*";
+                $str[$j]="*";
+               
             }
-            echo "<br/>";
+      
+             array_push($a,$str);
+            
+           
         }
-        echo "</html>";
+        return Formatresponse::successfullResponse($a);
+
+      
     }
     public function type2($max){
-        echo "<html>";
+        $a=array();
+        $str = "*";
         for($i=1; $i<=$max; $i++) {
+            $str="";
             for($j=$max; $j>=$i; $j--)
             {
-            echo '*';
+                $str[$j]="*";
             }
-            echo '<br>';
+            array_push($a,$str);
             }
-        echo "</html>";
+    
+            return Formatresponse::successfullResponse($a);
+     
     }
     public function type3($max){
         $min=$max-1;
+        $a=array();
+        $str = "*";
+        $space='&nbsp;&nbsp;';
         for($i=1; $i<=$max; $i++) {
             for($j=$min; $j>=$i; $j--) 
             {
-            echo '&nbsp;&nbsp;';
+                $str[$j]=$space;
             }
             for($k=1; $k<=$i; $k++)  
             {
-            echo '*';
+                $str[$k]="*";
             }
-            echo '<br>';
+            array_push($a,$str);
             }
+            return Formatresponse::successfullResponse($a);
+
+       
     }
 
 }

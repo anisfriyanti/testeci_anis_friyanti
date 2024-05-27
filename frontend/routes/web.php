@@ -3,6 +3,7 @@
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LevelController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,16 @@ Route::group(['prefix' => 'jabatan', 'as' => 'jabatan.'], function () {
     Route::post('/',[JabatanController::class, 'add']);
     Route::post('/edit',[JabatanController::class, 'edit']);
     Route::get('/delete/{id}',[JabatanController::class, 'delete']);
+    Route::get('/select',[JabatanController::class, 'select']);
+
+  
+   
+});
+Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
+    Route::get('/',[KaryawanController::class, 'index']);
+    Route::post('/',[KaryawanController::class, 'add']);
+    Route::post('/edit',[KaryawanController::class, 'edit']);
+    Route::get('/delete/{id}',[KaryawanController::class, 'delete']);
 
   
    

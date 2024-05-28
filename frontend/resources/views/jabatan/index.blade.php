@@ -201,7 +201,7 @@
                                     <div class="col-xs-6 col-md-9 input-group">
                                         <input type="text" class="form-control " name="nama_jabatan_show"
                                             id="nama_jabatan_show" placeholder="Input jabatan" required />
-                                            <input type="number" class="form-control " name="id_jabatan_show"
+                                            <input type="hidden" class="form-control " name="id_jabatan_show"
                                             id="id_jabatan_show" placeholder="Input jabatan" required />
                                     </div>
                                     
@@ -229,16 +229,12 @@
     </div>
     <script>
         $(".btnSelect").on('click', function() {
-          
             var currentRow = $(this).closest("tr");
             var col2 = currentRow.find(".pd_id_jabatan").html();
             var col3 = currentRow.find(".pd_nama_jabatan").html();
             var col4 =currentRow.find(".pd_level").html();
-            $("#nama_jabatan_show").val(col3);
-            $("#id_jabatan_show").val(col2);
-           
-            
             var baseUrl = "{{ env('APP_URL_WEB') }}";
+
         $("#level_select_edit").select2({
 
             width: '95%',
@@ -247,9 +243,9 @@
                     url: baseUrl + 'level/select',
                     dataType: 'json',
                     processResults: function(data) {
-                        
+                        document.getElementById("level_select_edit").selectedIndex=col4;
                         var remappedData = $.map(data.data, function(dt) {
-                            $("#level_select_edit").val(col4);
+                            // $("#level_select_edit").val(col4);
                             return {
                                 id: dt.id_level,
                                 text: dt.nama_level
@@ -266,6 +262,13 @@
                     }
                 }
             });
+
+         
+            $("#nama_jabatan_show").val(col3);
+            $("#id_jabatan_show").val(col2);
+           
+            
+           
            
 
 

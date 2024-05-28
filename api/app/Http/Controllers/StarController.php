@@ -81,22 +81,23 @@ class StarController extends Controller
     public function type3($max){
         $min=$max-1;
         $a=array();
-        $str = "*";
-        $space='&nbsp;&nbsp;';
-        for($i=1; $i<=$max; $i++) {
-            for($j=$min; $j>=$i; $j--) 
-            {
-                $str[$j]=$space;
+       
+        $str=" ";
+        for ($i=$max; $i >=1; $i--) {
+        
+            for($j=$min; $j>$max-$i; $j--) {
+              
+               "  ";
+       
             }
-            for($k=1; $k<=$i; $k++)  
-            {
-                $str[$k]="*";
+            for($j=$max; $j>=$i;$j--){
+           
+                $str[$j]="*";
+              
             }
             array_push($a,$str);
-            }
-            return Formatresponse::successfullResponse($a);
-
-       
-    }
+        }
+        return Formatresponse::successfullResponse($a);
+}
 
 }

@@ -4,6 +4,12 @@
 A brief description of what this project does and who it's for
 
 
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
+
 # testeci_anis_friyanti
 declare this variable in .env in Frontend Project
 ```bash
@@ -34,7 +40,19 @@ Output :
 }
 ```
 
-*masih minus type 3
+*masih minus type 3 di frontend.
+- output API type 3
+```bash 
+{
+    "code": 200,
+    "message": "data berhasil",
+    "data": [
+        "   *",
+        "  **",
+        " ***"
+    ]
+}
+```
 
 2. Test 2
 API :
@@ -60,9 +78,9 @@ Output :
  ```
 
  3. Test 3
- in file test_3.sql
+ - in file test_3.sql
 
- 
+
  4. Test 4
 
  
